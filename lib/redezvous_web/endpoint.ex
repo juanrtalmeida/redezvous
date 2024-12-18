@@ -16,9 +16,5 @@ defmodule RedezvousWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Jason
 
-  plug Absinthe.Plug, schema: RedezvousWeb.Schema
-
-  if Mix.env() == :dev do
-    plug Absinthe.Plug.GraphiQL, schema: RedezvousWeb.Schema
-  end
+  plug RedezvousWeb.Router
 end

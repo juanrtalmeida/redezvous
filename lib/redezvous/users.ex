@@ -12,7 +12,8 @@ defmodule Redezvous.Users do
       [%User{}, ...]
 
   """
-  def list_users(_args, _, _) do
-    []
+  def list_users(args, two, three) do
+    IO.inspect(two)
+    {:ok, []}
   end
 end

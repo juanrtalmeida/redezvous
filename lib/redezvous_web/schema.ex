@@ -9,6 +9,7 @@ defmodule RedezvousWeb.Schema do
   query do
     @desc "List all users"
     field :users, list_of(:user) do
+      arg(:name, non_null(:string))
       resolve(&Redezvous.list_users/3)
     end
   end
