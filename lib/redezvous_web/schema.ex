@@ -7,10 +7,18 @@ defmodule RedezvousWeb.Schema do
   import_types(RedezvousWeb.SchemaTypes)
 
   query do
-    @desc "List all users"
-    field :users, list_of(:user) do
-      arg(:name, non_null(:string))
-      resolve(&Redezvous.list_users/3)
+    @desc "User infos query"
+    field :user, :user do
+      arg(:id, non_null(:string))
+      resolve(&Redezvous.user_infos/3)
+    end
+  end
+
+  query do
+    @desc "Event infos query"
+    field :event, :event do
+      arg(:id, non_null(:string))
+      resolve(&Redezvous.list_events/3)
     end
   end
 end

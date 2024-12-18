@@ -11,10 +11,6 @@ defmodule RedezvousWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
-  plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json],
-    pass: ["*/*"],
-    json_decoder: Jason
-
   plug RedezvousWeb.Router
+  plug Plug.Head
 end
