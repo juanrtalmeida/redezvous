@@ -2,7 +2,7 @@ defmodule Redezvous.ManageAccount do
   alias Bcrypt
   alias Redezvous.Models.User
   alias Redezvous.Repo
-  alias Redezvous.Helpers.ChangesetHelper
+  alias Redezvous.Helpers.ChangesetHelpers
 
   @moduledoc """
   This module is responsible for managing the account of the user
@@ -41,7 +41,7 @@ defmodule Redezvous.ManageAccount do
   def create_user(params) do
     params
     |> User.changeset()
-    |> Map.put(:password, Bcrypt.hash_pwd_salt(params.password))
+    |> Ecto.Changeset.put_change(:password, Bcrypt.hash_pwd_salt(params.password))
     |> Repo.insert()
   end
 
@@ -52,6 +52,6 @@ defmodule Redezvous.ManageAccount do
       {:error,
        %{
          message: "User not created",
-         errors: changeset |> ChangesetHelper.convert_changeset_erros_to_json()
+         errors: changeset |> ChangesetHelpers.convert_changeset_erros_to_json()
        }}
 end

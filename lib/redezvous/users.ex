@@ -1,5 +1,6 @@
 defmodule Redezvous.Users do
   alias Redezvous.Repo
+  alias Redezvous.Models.User
 
   @moduledoc """
   This module should handle queries and mutations related to users

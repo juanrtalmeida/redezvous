@@ -1,7 +1,9 @@
 defmodule Redezvous.Auth do
+  @salt System.get_env("SALT")
   alias Redezvous.Users
   alias Phoenix.Token
-  @salt System.get_env("SALT")
+  alias RedezvousWeb.Endpoint
+  alias Redezvous.Models.User
 
   @doc """
   def login(email, password) :: {:ok, String.t} | {:error, String.t}
@@ -23,20 +25,21 @@ defmodule Redezvous.Auth do
     |> validate_password(password)
   end
 
-  @spec handle_user_search(nil | User) :: {:error, binary()} | {User.t()}
+  @spec handle_user_search(nil | User.t()) :: {:error, binary()} | {User.t()}
   defp handle_user_search(nil), do: {:error, "User not found"}
-  defp handle_user_search(user), do: user
+  defp handle_user_search(%User{} = user), do: user
 
-  @spec validate_password(User.t(), binary()) :: {:ok, binary()} | {:error, binary()}
+  @spec validate_password({:error, binary()} | {:ok, binary()}, binary()) :: {:ok, binary()} | {:error, binary()}
   defp validate_password({:error, "User not found"} = error, _pass), do: error
 
-  defp validate_password(user, password) do
-    Bcrypt.verify_pass(password, user.password) |> handle_password_verification(user)
+  @spec validate_password(User.t(), binary()) :: {:ok, binary()} | {:error, binary()}
+  defp validate_password(%User{password: user_password} = user, password) do
+    Bcrypt.verify_pass(password, user_password) |> handle_password_verification(user)
   end
 
   @spec handle_password_verification(boolean, User.t()) :: {:ok, binary()} | {:error, binary()}
   defp handle_password_verification(false, _), do: {:error, "Invalid password"}
-  defp handle_password_verification(true, user), do: {:ok, create_token(user)}
+  defp handle_password_verification(true, %User{} = user), do: {:ok, create_token(user)}
 
   @doc """
   def verify_token(token) :: {:ok, user_id} | {:error, String.t}
@@ -46,7 +49,7 @@ defmodule Redezvous.Auth do
   Usage:
 
       iex> AuthContext.verify_token("token")
-      {:ok, 1}
+      {:ok, %User{}}
 
       iex> AuthContext.verify_token("invalid_token")
       {:error, "Invalid token"}
@@ -54,6 +57,7 @@ defmodule Redezvous.Auth do
       iex> AuthContext.verify_token("expired_token")
       {:error, "Expired token"}
   """
+  @spec authorize(binary()) :: {:ok, User.t()} | {:error, binary()}
   def authorize(token) do
     case Token.verify(Endpoint, @salt, token) do
       {:ok, user} -> {:ok, user}
@@ -67,7 +71,8 @@ defmodule Redezvous.Auth do
 
    generates a token for the given user
   """
-  def create_token(user_id, max_age \\ 86_400) do
-    Token.sign(Endpoint, @salt, user_id, [{:max_age, max_age}])
+  @spec create_token(User.t(), integer()) :: binary()
+  def create_token(%User{} = user, max_age \\ 86_400) do
+    Token.sign(Endpoint, @salt, user, [{:max_age, max_age}])
   end
 end

@@ -30,7 +30,11 @@ defmodule RedezvousWeb.Contexts.AuthContext do
          {:ok, current_user} <- Auth.authorize(token) do
       %{current_user: current_user}
     else
-      _ -> %{}
+      {:error, "Expired token"} ->
+        %{expired: true}
+
+      _ ->
+        %{}
     end
   end
 end

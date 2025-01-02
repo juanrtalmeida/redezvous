@@ -1,4 +1,4 @@
-defmodule Redezvous.CreateUserMutation do
+defmodule Redezvous.CreateUserMutationTest do
   use RedezvousWeb.ConnCase, async: true
   alias Redezvous.Repo
   alias Redezvous.Models.User
