@@ -3,6 +3,7 @@ defmodule RedezvousWeb.SchemaTypes do
   Documentation for SchemaTypes.
   """
   use Absinthe.Schema.Notation
+  import_types(Absinthe.Type.Custom)
 
   object :user do
     field :id, :id
@@ -39,7 +40,7 @@ defmodule RedezvousWeb.SchemaTypes do
     field :name, :string
     field :description, :string
     field :location, :string
-    field :date, :utc_datetime
+    field :date, :datetime
     field :event_id, :id
     field :user_id, :id
 
@@ -60,7 +61,10 @@ defmodule RedezvousWeb.SchemaTypes do
     field :name, :string
     field :description, :string
     field :location, :string
-    field :date, :utc_datetime
+    field :date, :datetime
+    field :created_by, :id
+    field :finished, :boolean
+    field :cancelled, :boolean
 
     field :suggestions, list_of(:suggestion) do
       resolve(&Redezvous.list_suggestions/3)

@@ -4,7 +4,6 @@ defmodule RedezvousWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_live_flash
     plug :put_root_layout, html: {RedezvousWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
@@ -17,15 +16,19 @@ defmodule RedezvousWeb.Router do
       parsers: [:urlencoded, :multipart, :json, Absinthe.Plug.Parser],
       pass: ["*/*"],
       json_decoder: Jason
+
+    plug RedezvousWeb.Contexts.AuthContext
   end
 
   scope "/" do
     pipe_through :api
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: RedezvousWeb.Schema,
-      interface: :simple,
-      context: %{pubsub: RedezvousWeb.Endpoint}
+    if Mix.env() == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL,
+        schema: RedezvousWeb.Schema,
+        interface: :simple,
+        context: %{pubsub: RedezvousWeb.Endpoint}
+    end
 
     forward "/", Absinthe.Plug, schema: RedezvousWeb.Schema
   end

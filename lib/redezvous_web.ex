@@ -26,7 +26,6 @@ defmodule RedezvousWeb do
       # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
-      import Phoenix.LiveView.Router
     end
   end
 
@@ -47,23 +46,6 @@ defmodule RedezvousWeb do
       import Plug.Conn
 
       unquote(verified_routes())
-    end
-  end
-
-  def live_view do
-    quote do
-      use Phoenix.LiveView,
-        layout: {RedezvousWeb.Layouts, :app}
-
-      unquote(html_helpers())
-    end
-  end
-
-  def live_component do
-    quote do
-      use Phoenix.LiveComponent
-
-      unquote(html_helpers())
     end
   end
 
@@ -91,7 +73,6 @@ defmodule RedezvousWeb do
       import RedezvousWeb.CoreComponents
 
       # Shortcut for generating JS commands
-      alias Phoenix.LiveView.JS
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())

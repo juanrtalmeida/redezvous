@@ -5,11 +5,12 @@ defmodule Redezvous.MixProject do
     [
       app: :redezvous,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      compile: [warnings_as_errors: false]
     ]
   end
 
@@ -35,13 +36,13 @@ defmodule Redezvous.MixProject do
       {:absinthe, "~> 1.7.0"},
       {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_plug, "~> 1.5.0"},
+      {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.18"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.0.0"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:swoosh, "~> 1.5"},
@@ -66,7 +67,9 @@ defmodule Redezvous.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "test.watch": ["test.watch --stale"],
+      "reset.test": ["ecto.drop", "ecto.create", "ecto.migrate", "test"]
     ]
   end
 end
