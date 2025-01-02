@@ -1,6 +1,5 @@
 defmodule Redezvous.Models.Event do
   use Ecto.Schema
-  import Ecto.Changeset
   alias Redezvous.Models.User
 
   @moduledoc """

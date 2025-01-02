@@ -30,10 +30,4 @@ defmodule Redezvous.Users do
   def get_user_by_email(email) do
     Repo.get_by(User, email: email)
   end
-
-  def create_new_user(params, contexts) do
-    IO.inspect(params)
-    IO.inspect(contexts)
-    {:error, "User not found"}
-  end
 end

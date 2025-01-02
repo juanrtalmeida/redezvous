@@ -30,7 +30,7 @@ defmodule RedezvousWeb.Contexts.AuthContext do
          {:ok, current_user} <- Auth.authorize(token) do
       %{current_user: current_user}
     else
-      _ -> conn |> put_status(:unauthorized) |> halt
+      _ -> %{}
     end
   end
 end

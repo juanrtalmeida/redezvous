@@ -1,7 +1,6 @@
 defmodule Redezvous.Models.Suggestion do
   use Ecto.Schema
   alias Redezvous.Models.{User, Event}
-  import Ecto.Changeset
 
   @moduledoc """
   Documentation for Suggestion.

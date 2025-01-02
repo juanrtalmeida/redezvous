@@ -29,5 +29,11 @@ defmodule Redezvous do
 
   defdelegate create_login_token(params, contexts), to: Redezvous.Auth, as: :login
 
-  defdelegate create_new_user(params, contexts), to: Redezvous.Users
+  @doc """
+  def create_new_user(params, contexts)
+
+    This function should create a new user for the application
+  """
+
+  defdelegate create_new_user(params, contexts), to: Redezvous.ManageAccount
 end

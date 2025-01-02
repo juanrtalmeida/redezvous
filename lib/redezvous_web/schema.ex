@@ -4,6 +4,8 @@ defmodule RedezvousWeb.Schema do
   """
   use Absinthe.Schema
 
+  @compile :no_warn_undefined
+
   import_types(RedezvousWeb.SchemaTypes)
 
   query do
