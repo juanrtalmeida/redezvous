@@ -11,6 +11,7 @@ env:
   # NOTE: make sure these versions match in Containerfile and .tool-versions
   ELIXIR_VERSION_SPEC: "1.17"
   OTP_VERSION_SPEC: "26"
+  SALT: "SALT_TEST"
 
 jobs:
   compile:
@@ -21,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1.16
+        uses: erlef/setup-beam@v1.17
         with:
           elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
           otp-version: ${{ env.OTP_VERSION_SPEC }}
