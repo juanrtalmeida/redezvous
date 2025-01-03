@@ -5,9 +5,13 @@ defmodule Redezvous.Models.Vote do
   @moduledoc """
   Documentation for Vote.
   """
-  schema "vote" do
+
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
+  schema "votes" do
     field :value, :boolean
-    belongs_to :user_id, User
+    belongs_to :user, User
     belongs_to :suggestion, Suggestion
     timestamps()
   end

@@ -10,28 +10,16 @@ defmodule RedezvousWeb.SchemaTypes do
     field :name, :string
     field :email, :string
 
-    field :suggestions, list_of(:suggestion) do
-      resolve(&Redezvous.list_suggestions/3)
-    end
-
-    field :votes, list_of(:vote) do
-      resolve(&Redezvous.list_votes/3)
-    end
-
-    field :events, list_of(:event) do
-      resolve(&Redezvous.list_events/3)
-    end
-
     field :created_events, list_of(:event) do
-      resolve(&Redezvous.list_created_events/3)
+      resolve(&Redezvous.list_created_events/2)
     end
 
     field :created_suggestions, list_of(:suggestion) do
-      resolve(&Redezvous.list_created_suggestions/3)
+      resolve(&Redezvous.list_created_suggestions/2)
     end
 
     field :created_votes, list_of(:vote) do
-      resolve(&Redezvous.list_created_votes/3)
+      resolve(&Redezvous.list_created_votes/2)
     end
   end
 
@@ -43,10 +31,6 @@ defmodule RedezvousWeb.SchemaTypes do
     field :date, :datetime
     field :event_id, :id
     field :user_id, :id
-
-    field :votes, list_of(:vote) do
-      resolve(&Redezvous.list_votes/3)
-    end
   end
 
   object :vote do
@@ -65,9 +49,5 @@ defmodule RedezvousWeb.SchemaTypes do
     field :created_by, :id
     field :finished, :boolean
     field :cancelled, :boolean
-
-    field :suggestions, list_of(:suggestion) do
-      resolve(&Redezvous.list_suggestions/3)
-    end
   end
 end

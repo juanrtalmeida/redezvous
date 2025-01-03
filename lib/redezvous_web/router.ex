@@ -26,7 +26,6 @@ defmodule RedezvousWeb.Router do
     if Mix.env() == :dev do
       forward "/graphiql", Absinthe.Plug.GraphiQL,
         schema: RedezvousWeb.Schema,
-        interface: :simple,
         context: %{pubsub: RedezvousWeb.Endpoint}
     end
 

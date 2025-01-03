@@ -36,4 +36,25 @@ defmodule Redezvous do
   """
 
   defdelegate create_new_user(params, contexts), to: Redezvous.ManageAccount
+
+  @doc """
+  def list_created_votes(params, contexts)
+
+    This function should return the list of votes created by the user
+  """
+  defdelegate list_created_votes(params, contexts), to: Redezvous.Accounts.AccountFieldsResolvers
+
+  @doc """
+  def list_created_suggestions(params, contexts)
+
+    This function should return the list of suggestions created by the user
+  """
+  defdelegate list_created_suggestions(params, contexts), to: Redezvous.Accounts.AccountFieldsResolvers
+
+  @doc """
+  def list_created_events(params, contexts)
+
+    This function should return the list of events created by the user
+  """
+  defdelegate list_created_events(params, contexts), to: Redezvous.Accounts.AccountFieldsResolvers
 end

@@ -3,21 +3,15 @@ defmodule RedezvousWeb.Schema do
   Documentation for Schema.
   """
   use Absinthe.Schema
-
-  @compile :no_warn_undefined
+  alias RedezvousWeb.Middlewares.AuthMiddleware
 
   import_types(RedezvousWeb.SchemaTypes)
 
   query do
     @desc "User infos query"
     field :user, :user do
+      middleware(AuthMiddleware)
       resolve(&Redezvous.user_infos/2)
-    end
-
-    @desc "Event infos query"
-    field :event, :event do
-      arg(:id, non_null(:string))
-      resolve(&Redezvous.list_events/3)
     end
 
     @desc "Create login token"

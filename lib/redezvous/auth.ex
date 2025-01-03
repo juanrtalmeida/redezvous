@@ -1,5 +1,6 @@
 defmodule Redezvous.Auth do
-  @salt System.get_env("SALT")
+  @moduledoc false
+  @salt System.get_env("SALT") || "salt"
   alias Redezvous.Users
   alias Phoenix.Token
   alias RedezvousWeb.Endpoint
@@ -18,8 +19,8 @@ defmodule Redezvous.Auth do
     iex> Auth.login("email", "wrong_password")
     {:error, "Invalid password"}
   """
-  @spec login(binary(), binary()) :: {:ok, binary()} | {:error, binary()}
-  def login(email, password) do
+  @spec login(map(), map()) :: {:ok, binary()} | {:error, binary()}
+  def login(%{email: email, password: password}, _) do
     Users.get_user_by_email(email)
     |> handle_user_search()
     |> validate_password(password)
