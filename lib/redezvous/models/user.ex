@@ -1,4 +1,5 @@
 defmodule Redezvous.Models.User do
+  @moduledoc false
   use Ecto.Schema
   alias Redezvous.Models.{Event, Vote, Suggestion}
   import Ecto.Changeset
@@ -26,7 +27,7 @@ defmodule Redezvous.Models.User do
     field :password, :string
     has_many :suggestions, Suggestion
     has_many :votes, Vote
-    has_many :events, Event
+    has_many :events, Event, foreign_key: :created_by_id
 
     timestamps()
   end

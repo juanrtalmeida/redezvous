@@ -13,17 +13,17 @@ defmodule Redezvous.AuthTest do
 
   test "should make successful login" do
     user = UserFactory.build_user!(%{password: "password"})
-    assert {:ok, token} = Auth.login(user.email, "password")
+    assert {:ok, token} = Auth.login(%{email: user.email, password: "password"}, [])
     assert is_binary(token)
   end
 
   test "should not make login if the password is incorrect" do
     user = UserFactory.build_user!(%{password: "password"})
-    assert {:error, "Invalid password"} = Auth.login(user.email, "wrong_password")
+    assert {:error, "Invalid password"} = Auth.login(%{email: user.email, password: "wrong_password"}, [])
   end
 
   test "should not make login if the user is not found" do
-    assert {:error, "User not found"} = Auth.login("unknown@example.com", "password")
+    assert {:error, "User not found"} = Auth.login(%{email: "unknown@example.com", password: "password"}, [])
   end
 
   test "should authorize a valid token" do

@@ -20,7 +20,7 @@ defmodule Redezvous.MixProject do
   def application do
     [
       mod: {Redezvous.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :bunt, :runtime_tools]
     ]
   end
 
@@ -37,6 +37,10 @@ defmodule Redezvous.MixProject do
       {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_plug, "~> 1.5.0"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:credo, "1.7.11", only: [:dev, :test], runtime: false},
+      {:bunt, "~> 1.0.0", override: true},
+      {:dialyxir, "~> 1.3.0", only: [:dev], runtime: false},
+      {:ex_doc, "~> 0.25.0", only: [:dev], runtime: false},
       {:phoenix, "~> 1.7.18"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},

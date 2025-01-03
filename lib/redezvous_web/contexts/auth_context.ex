@@ -1,4 +1,5 @@
 defmodule RedezvousWeb.Contexts.AuthContext do
+  @moduledoc false
   @behaviour Plug
 
   import Plug.Conn

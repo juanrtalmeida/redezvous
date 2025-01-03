@@ -1,4 +1,5 @@
-defmodule Support.Fixtures.ConnFixtures do
+defmodule RedezvousWeb.Fixtures.ConnFixtures do
+  @moduledoc false
   alias Plug.Conn
 
   alias Redezvous.Auth

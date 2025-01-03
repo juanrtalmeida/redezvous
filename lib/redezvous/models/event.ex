@@ -5,7 +5,11 @@ defmodule Redezvous.Models.Event do
   @moduledoc """
   Documentation for Event.
   """
-  schema "event" do
+
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
+  schema "events" do
     field :title, :string
     field :description, :string
     field :date, :utc_datetime
@@ -13,7 +17,7 @@ defmodule Redezvous.Models.Event do
     field :finished, :boolean
     field :cancelled, :boolean
 
-    belongs_to :created_by, User
+    belongs_to :created_by, User, foreign_key: :created_by_id
 
     timestamps()
   end

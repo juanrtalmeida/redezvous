@@ -1,18 +1,29 @@
 # Redezvous
 
-To start your Phoenix server:
+A collaborative event planning application that makes organizing get-togethers with friends simple and democratic.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## 🌟 Features
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- **Democratic Event Planning**: Create gatherings and let participants vote on:
+  - Date and time
+  - Location
+  - Activities
+  - Food and beverages
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+- **Easy Organization**:
+  - Create and manage multiple events
+  - Invite friends via email or sharing links
+  - Track RSVPs and preferences
+  - Real-time voting results
 
-## Learn more
+- **Flexible Decision Making**:
+  - Multiple voting options for each aspect
+  - Deadline settings for decisions
+  - Automatic selection of winning options
+  - Option to override as event organizer
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+
