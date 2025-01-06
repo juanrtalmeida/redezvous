@@ -1,4 +1,5 @@
 defmodule RedezvousWeb.Queries.UserInfosQueryTest do
+  @moduledoc false
   use RedezvousWeb.ConnCase, async: true
   alias RedezvousWeb.Fixtures.ConnFixtures
   alias Redezvous.Repo
@@ -16,12 +17,14 @@ defmodule RedezvousWeb.Queries.UserInfosQueryTest do
   },
   createdEvents{
     cancelled,
-    createdBy,
+    createdBy{
+      id
+    },
     date,
     description,
     finished,
     location,
-    name
+    title
   },
   createdSuggestions{
     date,

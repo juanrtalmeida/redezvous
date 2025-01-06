@@ -28,19 +28,18 @@ defmodule Redezvous.Auth do
 
   @spec handle_user_search(nil | User.t()) :: {:error, binary()} | {User.t()}
   defp handle_user_search(nil), do: {:error, "User not found"}
-  defp handle_user_search(%User{} = user), do: user
+  defp handle_user_search(user = %User{}), do: user
 
-  @spec validate_password({:error, binary()} | {:ok, binary()}, binary()) :: {:ok, binary()} | {:error, binary()}
-  defp validate_password({:error, "User not found"} = error, _pass), do: error
-
-  @spec validate_password(User.t(), binary()) :: {:ok, binary()} | {:error, binary()}
-  defp validate_password(%User{password: user_password} = user, password) do
+  @spec validate_password({:error, binary()} | User.t(), binary()) :: {:ok, binary()} | {:error, binary()}
+  defp validate_password(user = %User{password: user_password}, password) do
     Bcrypt.verify_pass(password, user_password) |> handle_password_verification(user)
   end
 
-  @spec handle_password_verification(boolean, User.t()) :: {:ok, binary()} | {:error, binary()}
+  defp validate_password(error = {:error, "User not found"}, _pass), do: error
+
+  @spec handle_password_verification(boolean(), User.t()) :: {:ok, binary()} | {:error, binary()}
   defp handle_password_verification(false, _), do: {:error, "Invalid password"}
-  defp handle_password_verification(true, %User{} = user), do: {:ok, create_token(user)}
+  defp handle_password_verification(true, user = %User{}), do: {:ok, create_token(user)}
 
   @doc """
   def verify_token(token) :: {:ok, user_id} | {:error, String.t}
@@ -72,8 +71,8 @@ defmodule Redezvous.Auth do
 
    generates a token for the given user
   """
-  @spec create_token(User.t(), integer()) :: binary()
-  def create_token(%User{} = user, max_age \\ 86_400) do
+  @spec create_token(User.t(), integer() | 86_400) :: binary()
+  def create_token(user = %User{}, max_age \\ 86_400) do
     Token.sign(Endpoint, @salt, user, [{:max_age, max_age}])
   end
 end

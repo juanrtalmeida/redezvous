@@ -2,7 +2,7 @@ defmodule Redezvous.ManageAccount do
   alias Bcrypt
   alias Redezvous.Models.User
   alias Redezvous.Repo
-  alias Redezvous.Helpers.ChangesetHelpers
+  alias Redezvous.Helpers.HandlerHelpers
 
   @moduledoc """
   This module is responsible for managing the account of the user
@@ -15,7 +15,7 @@ defmodule Redezvous.ManageAccount do
   """
   @spec create_new_user(
           %{name: String.t(), email: String.t(), password: String.t()},
-          Absinthe.Resolution.t(%{context: %{current_user: User.t()}})
+          %Absinthe.Resolution{context: %{current_user: User.t()}}
         ) ::
           {:ok, User.t()}
           | {:error,
@@ -26,7 +26,7 @@ defmodule Redezvous.ManageAccount do
   def create_new_user(params, _contexts) do
     params
     |> create_user()
-    |> handle_user_insertion()
+    |> HandlerHelpers.handle_insertion("User not created")
   end
 
   @doc """
@@ -37,21 +37,11 @@ defmodule Redezvous.ManageAccount do
   It also hashes the password of the user
   """
   @spec create_user(%{name: String.t(), email: String.t(), password: String.t()}) ::
-          Ecto.Changeset.t() | User.t()
+          {:ok, User.t()} | {:error, Ecto.Changeset.t()}
   def create_user(params) do
     params
     |> User.changeset()
     |> Ecto.Changeset.put_change(:password, Bcrypt.hash_pwd_salt(params.password))
     |> Repo.insert()
   end
-
-  def handle_user_insertion({:ok, _user} = result), do: result
-
-  def handle_user_insertion({:error, changeset}),
-    do:
-      {:error,
-       %{
-         message: "User not created",
-         errors: changeset |> ChangesetHelpers.convert_changeset_erros_to_json()
-       }}
 end

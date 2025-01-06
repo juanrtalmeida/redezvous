@@ -7,11 +7,11 @@ defmodule RedezvousWeb.Middlewares.AuthMiddleware do
 
   alias Redezvous.Models.User
 
-  def call(%Absinthe.Resolution{context: %{current_user: %User{} = _user}} = resolution, _) do
+  def call(resolution = %Absinthe.Resolution{context: %{current_user: %User{} = _user}}, _) do
     resolution
   end
 
-  def call(%Absinthe.Resolution{context: %{expired: true}} = resolution, _) do
+  def call(resolution = %Absinthe.Resolution{context: %{expired: true}}, _) do
     resolution |> Absinthe.Resolution.put_result({:error, ["Unauthorized", "Expired token"]})
   end
 
