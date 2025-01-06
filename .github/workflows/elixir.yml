@@ -9,7 +9,7 @@ on:
 env:
   MIX_ENV: test
   # NOTE: make sure these versions match in Containerfile and .tool-versions
-  ELIXIR_VERSION_SPEC: "1.17"
+  ELIXIR_VERSION_SPEC: "1.18"
   OTP_VERSION_SPEC: "26"
   SALT: "SALT_TEST"
 
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1.17
+        uses: erlef/setup-beam@v1.18
         with:
           elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
           otp-version: ${{ env.OTP_VERSION_SPEC }}
@@ -59,7 +59,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1.17
+        uses: erlef/setup-beam@v1.18
         with:
           elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
           otp-version: ${{ env.OTP_VERSION_SPEC }}
@@ -96,7 +96,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1.17
+        uses: erlef/setup-beam@v1.18
         with:
           elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
           otp-version: ${{ env.OTP_VERSION_SPEC }}
