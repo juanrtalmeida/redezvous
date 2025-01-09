@@ -1,6 +1,7 @@
 defmodule Redezvous.Users do
-  alias Redezvous.Repo
+  alias Absinthe.Resolution
   alias Redezvous.Models.User
+  alias Redezvous.Repo
 
   @moduledoc """
   This module should handle queries and mutations related to users
@@ -22,7 +23,7 @@ defmodule Redezvous.Users do
   """
   @spec user_infos(
           %{},
-          Absinthe.Resolution.t(%{context: %{current_user: User.t()}})
+          %Resolution{context: %{current_user: User.t()}}
         ) :: {:ok, list()}
   def user_infos(_, %{context: %{current_user: current_user}}) do
     {:ok, current_user}

@@ -1,7 +1,8 @@
 defmodule Redezvous.CreateUserMutationTest do
+  @moduledoc false
   use RedezvousWeb.ConnCase, async: true
-  alias Redezvous.Repo
   alias Redezvous.Models.User
+  alias Redezvous.Repo
   alias Redezvous.UserFactory
 
   test "should create a user correctly", %{conn: conn} do

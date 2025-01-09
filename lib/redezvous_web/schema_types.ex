@@ -42,12 +42,13 @@ defmodule RedezvousWeb.SchemaTypes do
 
   object :event do
     field :id, :id
-    field :name, :string
+    field :title, :string
     field :description, :string
     field :location, :string
     field :date, :datetime
-    field :created_by, :id
     field :finished, :boolean
     field :cancelled, :boolean
+    field :created_by, :user
+    field :guests, list_of(:user)
   end
 end

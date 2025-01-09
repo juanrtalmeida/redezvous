@@ -42,7 +42,7 @@ defmodule Redezvous.UserFactory do
   }
   ```
   """
-  @spec build_user!(%{email: String.t(), password: String.t(), name: String.t()}) :: User.t()
+  @spec build_user!(%{email: String.t(), password: String.t(), name: String.t()} | %{}) :: User.t() | no_return()
   def build_user!(params \\ %{}) do
     @default_user_params
     |> Map.merge(params)

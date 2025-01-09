@@ -1,8 +1,8 @@
 defmodule Redezvous.ChangesetHelpersTest do
   use RedezvousWeb.ConnCase, async: true
-  alias Redezvous.Models.User
-  alias Redezvous.Helpers.ChangesetHelpers
   alias Ecto.Changeset
+  alias Redezvous.Helpers.ChangesetHelpers
+  alias Redezvous.Models.User
 
   test "should convert changeset errors to json" do
     changeset =

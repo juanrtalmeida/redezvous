@@ -2,8 +2,8 @@ defmodule Redezvous.AuthTest do
   use Redezvous.DataCase, async: true
 
   alias Redezvous.Auth
-  alias Redezvous.UserFactory
   alias Redezvous.Models.User
+  alias Redezvous.UserFactory
 
   test "should create a login token" do
     user = UserFactory.build_user!()

@@ -1,8 +1,8 @@
 defmodule Redezvous.Models.User do
   @moduledoc false
   use Ecto.Schema
-  alias Redezvous.Models.{Event, Vote, Suggestion}
   import Ecto.Changeset
+  alias Redezvous.Models.{Event, Suggestion, Vote}
 
   @derive {Jason.Encoder, except: [:password]}
 
@@ -28,11 +28,11 @@ defmodule Redezvous.Models.User do
     has_many :suggestions, Suggestion
     has_many :votes, Vote
     has_many :events, Event, foreign_key: :created_by_id
-
+    many_to_many :guest, Event, join_through: "events_guests", join_keys: [user_id: :id, event_id: :id]
     timestamps()
   end
 
-  @spec changeset(User.t(), map()) :: Ecto.Changeset.t()
+  @spec changeset(%__MODULE__{}, map()) :: Ecto.Changeset.t()
   def changeset(struct \\ %__MODULE__{}, attrs) do
     struct
     |> cast(attrs, [:name, :email, :password])
@@ -42,7 +42,7 @@ defmodule Redezvous.Models.User do
     |> validate_length(:name, max: 255)
     |> validate_length(:password, min: 8)
     |> validate_length(:password, max: 255)
-    |> validate_format(:name, ~r/^[a-zA-Z]+ [a-zA-Z]+$/)
+    |> validate_format(:name, ~r/^[a-zA-Z]+( [a-zA-Z]+)+$/)
     |> validate_format(:email, ~r/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
     |> unique_constraint(:email)
   end

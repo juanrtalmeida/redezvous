@@ -1,9 +1,8 @@
 defmodule Redezvous.AuthMiddlewareTest do
-  use RedezvousWeb.ConnCase, async: true
-
-  alias RedezvousWeb.Middlewares.AuthMiddleware
-  alias Redezvous.UserFactory
   alias Absinthe.Resolution
+  alias Redezvous.UserFactory
+  use RedezvousWeb.ConnCase, async: true
+  alias RedezvousWeb.Middlewares.AuthMiddleware
 
   test "should authorized if current_user is present" do
     user = UserFactory.build_user!()

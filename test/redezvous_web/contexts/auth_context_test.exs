@@ -1,8 +1,9 @@
 defmodule RedezvousWeb.AuthContextTest do
+  @moduledoc false
   use RedezvousWeb.ConnCase, async: true
+  alias Redezvous.Models.User
   alias RedezvousWeb.Contexts.AuthContext
   alias RedezvousWeb.Fixtures.ConnFixtures
-  alias Redezvous.Models.User
 
   test "should build context and set current user", %{conn: conn} do
     updated_conn =

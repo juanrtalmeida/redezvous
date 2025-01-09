@@ -18,7 +18,7 @@ defmodule RedezvousWeb.Fixtures.ConnFixtures do
   """
   @spec build_conn_with_valid_token(
           Conn.t(),
-          %{name: String.t(), email: String.t(), password: String.t()} | nil
+          %{name: String.t(), email: String.t(), password: String.t()} | %{}
         ) :: Conn.t()
   def build_conn_with_valid_token(conn, user_params \\ %{}) do
     user = UserFactory.build_user!(user_params)

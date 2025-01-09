@@ -57,4 +57,12 @@ defmodule Redezvous do
     This function should return the list of events created by the user
   """
   defdelegate list_created_events(params, contexts), to: Redezvous.Accounts.AccountFieldsResolvers
+
+  @doc """
+  def create_new_event(params, contexts)
+
+    This function should create a new event
+  """
+
+  defdelegate create_new_event(params, contexts), to: Redezvous.ManageEvents
 end
