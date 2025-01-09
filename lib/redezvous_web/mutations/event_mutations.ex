@@ -12,6 +12,7 @@ defmodule RedezvousWeb.Mutations.EventMutations do
       arg(:description, non_null(:string))
       arg(:date, :string, description: "Date in format YYYY-MM-DD")
       arg(:location, :string)
+      arg(:guests, list_of(:string), description: "List of guest emails")
       middleware(AuthMiddleware)
       resolve(&Redezvous.create_new_event/2)
     end

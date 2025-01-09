@@ -1,6 +1,6 @@
 defmodule Redezvous.Models.Vote do
   use Ecto.Schema
-  alias Redezvous.Models.{User, Suggestion}
+  alias Redezvous.Models.{Suggestion, User}
 
   @moduledoc """
   Documentation for Vote.

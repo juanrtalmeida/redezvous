@@ -49,5 +49,6 @@ defmodule RedezvousWeb.SchemaTypes do
     field :finished, :boolean
     field :cancelled, :boolean
     field :created_by, :user
+    field :guests, list_of(:user)
   end
 end

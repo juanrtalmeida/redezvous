@@ -1,6 +1,6 @@
 defmodule Redezvous.Models.Suggestion do
+  alias Redezvous.Models.{Event, User}
   use Ecto.Schema
-  alias Redezvous.Models.{User, Event}
 
   @moduledoc """
   Documentation for Suggestion.

@@ -1,10 +1,10 @@
 defmodule Redezvous.Auth do
   @moduledoc false
   @salt System.get_env("SALT") || "salt"
-  alias Redezvous.Users
   alias Phoenix.Token
-  alias RedezvousWeb.Endpoint
   alias Redezvous.Models.User
+  alias Redezvous.Users
+  alias RedezvousWeb.Endpoint
 
   @doc """
   def login(email, password) :: {:ok, String.t} | {:error, String.t}

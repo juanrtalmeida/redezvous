@@ -3,11 +3,9 @@ defmodule Redezvous.Repo.Migrations.CreateEventsGuestsTable do
   use Ecto.Migration
 
   def change do
-    create table(:events_guests) do
+    create table(:events_guests, primary_key: false) do
       add :user_id, references(:users)
       add :event_id, references(:events)
-
-      timestamps()
     end
   end
 end

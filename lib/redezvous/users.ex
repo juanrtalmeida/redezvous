@@ -1,7 +1,7 @@
 defmodule Redezvous.Users do
-  alias Redezvous.Repo
-  alias Redezvous.Models.User
   alias Absinthe.Resolution
+  alias Redezvous.Models.User
+  alias Redezvous.Repo
 
   @moduledoc """
   This module should handle queries and mutations related to users

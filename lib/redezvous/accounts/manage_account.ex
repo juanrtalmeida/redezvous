@@ -1,8 +1,8 @@
 defmodule Redezvous.ManageAccount do
   alias Bcrypt
+  alias Redezvous.Helpers.HandlerHelpers
   alias Redezvous.Models.User
   alias Redezvous.Repo
-  alias Redezvous.Helpers.HandlerHelpers
 
   @moduledoc """
   This module is responsible for managing the account of the user

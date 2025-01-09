@@ -1,8 +1,8 @@
 defmodule Redezvous.Models.User do
   @moduledoc false
   use Ecto.Schema
-  alias Redezvous.Models.{Event, Vote, Suggestion}
   import Ecto.Changeset
+  alias Redezvous.Models.{Event, Suggestion, Vote}
 
   @derive {Jason.Encoder, except: [:password]}
 
@@ -28,7 +28,7 @@ defmodule Redezvous.Models.User do
     has_many :suggestions, Suggestion
     has_many :votes, Vote
     has_many :events, Event, foreign_key: :created_by_id
-    many_to_many :guest, Event, join_through: "event_guests"
+    many_to_many :guest, Event, join_through: "events_guests", join_keys: [user_id: :id, event_id: :id]
     timestamps()
   end
 

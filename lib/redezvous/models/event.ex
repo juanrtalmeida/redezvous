@@ -32,7 +32,7 @@ defmodule Redezvous.Models.Event do
     field :cancelled, :boolean, default: false
 
     belongs_to :created_by, User, foreign_key: :created_by_id
-    many_to_many :guest, User, join_through: "event_guests"
+    many_to_many :guests, User, join_through: "events_guests", join_keys: [event_id: :id, user_id: :id]
     timestamps()
   end
 
@@ -42,5 +42,6 @@ defmodule Redezvous.Models.Event do
     |> validate_required([:title, :description])
     |> validate_required([:title, :description])
     |> put_assoc(:created_by, params.created_by)
+    |> put_assoc(:guests, params.guests)
   end
 end

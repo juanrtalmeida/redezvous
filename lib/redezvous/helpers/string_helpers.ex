@@ -21,4 +21,13 @@ defmodule Redezvous.Helpers.StringHelpers do
         to_string(Keyword.get(validation_variables, key |> String.to_atom(), "%{#{key}}"))
     end)
   end
+
+  @spec create_random_string(integer()) :: String.t()
+  def create_random_string(length) do
+    for _ <- 1..length, into: "", do: <<Enum.random(?a..?z)>>
+  end
+
+  def create_random_email do
+    "#{create_random_string(10)}@#{create_random_string(10)}.#{create_random_string(3)}"
+  end
 end

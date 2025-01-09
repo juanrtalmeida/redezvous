@@ -1,7 +1,6 @@
 defmodule Redezvous.EventFactoryTest do
   @moduledoc false
   use RedezvousWeb.ConnCase, async: true
-
   alias Redezvous.EventFactory
   alias Redezvous.UserFactory
 
@@ -49,5 +48,17 @@ defmodule Redezvous.EventFactoryTest do
       UserFactory.build_user!()
       |> EventFactory.build_event!(%{title: "test", description: "test", date: "2022-01-01", location: "test"})
     end
+  end
+
+  test "should create event with given guests" do
+    user1 = UserFactory.build_user!()
+    user2 = UserFactory.build_user!(%{email: "example2@gmail.com"})
+
+    event =
+      UserFactory.build_user!(%{email: "real_test@test.com", name: "real test"})
+      |> EventFactory.build_event!(%{title: "test", description: "test", date: "2022-01-01T00:00:00Z", location: "test", guests: [user1.email, user2.email]})
+
+    assert event.guests == [user1, user2]
+    assert event.created_by.name == "real test"
   end
 end
