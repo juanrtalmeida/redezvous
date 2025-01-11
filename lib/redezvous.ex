@@ -65,4 +65,21 @@ defmodule Redezvous do
   """
 
   defdelegate create_new_event(params, contexts), to: Redezvous.ManageEvents
+
+  @doc """
+  def get_event_infos(params, contexts)
+
+    This function should return the event infos
+  """
+  defdelegate get_event_infos(params, contexts), to: Redezvous.Events.EventFieldsResolver
+
+  @doc """
+  def list_guests(params, contexts)
+
+    This function should return the list of guests
+
+  """
+  defdelegate list_guests(parent, params, contexts), to: Redezvous.Events.EventFieldsResolver
+
+  defdelegate event_created_by(parent, params, contexts), to: Redezvous.Events.EventFieldsResolver
 end
