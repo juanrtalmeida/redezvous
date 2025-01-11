@@ -48,7 +48,13 @@ defmodule RedezvousWeb.SchemaTypes do
     field :date, :datetime
     field :finished, :boolean
     field :cancelled, :boolean
-    field :created_by, :user
-    field :guests, list_of(:user)
+
+    field :created_by, :user do
+      resolve(&Redezvous.event_created_by/3)
+    end
+
+    field :guests, list_of(:user) do
+      resolve(&Redezvous.list_guests/3)
+    end
   end
 end

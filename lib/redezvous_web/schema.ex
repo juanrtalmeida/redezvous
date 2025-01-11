@@ -8,24 +8,26 @@ defmodule RedezvousWeb.Schema do
   import_types(RedezvousWeb.SchemaTypes)
   import_types(RedezvousWeb.Mutations.EventMutations)
   import_types(RedezvousWeb.Mutations.UserMutations)
+  import_types(RedezvousWeb.Queries.EventQueries)
 
   query do
+    import_fields(:event_queries)
     @desc "User infos query"
     field :user, :user do
-      middleware AuthMiddleware
-      resolve &Redezvous.user_infos/2
+      middleware(AuthMiddleware)
+      resolve(&Redezvous.user_infos/2)
     end
 
     @desc "Create login token"
     field :create_login_token, :string do
-      arg :email, non_null(:string), description: "User email"
-      arg :password, non_null(:string), description: "User password"
-      resolve &Redezvous.create_login_token/2
+      arg(:email, non_null(:string), description: "User email")
+      arg(:password, non_null(:string), description: "User password")
+      resolve(&Redezvous.create_login_token/2)
     end
   end
 
   mutation do
-    import_fields :event_mutations
-    import_fields :user_mutations
+    import_fields(:event_mutations)
+    import_fields(:user_mutations)
   end
 end
