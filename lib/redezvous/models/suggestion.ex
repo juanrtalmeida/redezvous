@@ -1,6 +1,7 @@
 defmodule Redezvous.Models.Suggestion do
   alias Redezvous.Models.{Event, User}
   use Ecto.Schema
+  import Ecto.Changeset
 
   @moduledoc """
   Documentation for Suggestion.
@@ -17,6 +18,7 @@ defmodule Redezvous.Models.Suggestion do
           date: DateTime.t(),
           event: Event.t(),
           user: User.t(),
+          event: Event.t(),
           inserted_at: DateTime.t(),
           updated_at: DateTime.t()
         }
@@ -30,5 +32,13 @@ defmodule Redezvous.Models.Suggestion do
     belongs_to :user, User
 
     timestamps()
+  end
+
+  def changeset(suggestion \\ %__MODULE__{}, atts) do
+    suggestion
+    |> cast(atts, [:name, :description, :location, :date])
+    |> validate_required([:name, :description])
+    |> put_assoc(:user, atts.created_by)
+    |> put_assoc(:event, atts.event)
   end
 end

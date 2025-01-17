@@ -49,6 +49,10 @@ defmodule RedezvousWeb.SchemaTypes do
     field :finished, :boolean
     field :cancelled, :boolean
 
+    field :suggestions, list_of(:suggestion) do
+      resolve(&Redezvous.list_suggestions/3)
+    end
+
     field :created_by, :user do
       resolve(&Redezvous.event_created_by/3)
     end
