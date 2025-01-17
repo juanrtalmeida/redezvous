@@ -82,4 +82,8 @@ defmodule Redezvous do
   defdelegate list_guests(parent, params, contexts), to: Redezvous.Events.EventFieldsResolver
 
   defdelegate event_created_by(parent, params, contexts), to: Redezvous.Events.EventFieldsResolver
+
+  defdelegate create_new_suggestion(params, contexts), to: Redezvous.Suggestion.ManageSuggestions
+
+  defdelegate list_suggestions(parent, params, contexts), to: Redezvous.Suggestion.ManageSuggestions
 end

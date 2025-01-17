@@ -9,6 +9,7 @@ defmodule RedezvousWeb.Schema do
   import_types(RedezvousWeb.Mutations.EventMutations)
   import_types(RedezvousWeb.Mutations.UserMutations)
   import_types(RedezvousWeb.Queries.EventQueries)
+  import_types(RedezvousWeb.Mutations.SuggestionMutations)
 
   query do
     import_fields(:event_queries)
@@ -29,5 +30,6 @@ defmodule RedezvousWeb.Schema do
   mutation do
     import_fields(:event_mutations)
     import_fields(:user_mutations)
+    import_fields(:suggestion_mutations)
   end
 end
