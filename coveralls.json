@@ -1,0 +1,16 @@
+{
+  "skip_files": [
+    "lib/redezvous/mailer.ex",
+    "lib/redezvous/repo.ex",
+    "lib/redezvous_web/endpoint.ex",
+    "lib/redezvous_web/router.ex",
+    "lib/redezvous_web/error_json.ex",
+    "lib/redezvous_web/gettext.ex",
+    "lib/redezvous_web/mutations",
+    "lib/redezvous_web/queries",
+    "lib/redezvous_web/schema.ex",
+    "lib/redezvous_web/schema_types.ex",
+    "test/support/data_case.ex",
+    "test/support/conn_case.ex"
+  ]
+}

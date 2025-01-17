@@ -1,5 +1,6 @@
 defmodule Redezvous.Models.Vote do
   use Ecto.Schema
+  import Ecto.Changeset
   alias Redezvous.Models.{Suggestion, User}
 
   @moduledoc """
@@ -23,5 +24,14 @@ defmodule Redezvous.Models.Vote do
     belongs_to :user, User
     belongs_to :suggestion, Suggestion
     timestamps()
+  end
+
+  def changeset(vote, attrs) do
+    vote
+    |> cast(attrs, [:value, :suggestion_id])
+    |> validate_required([:value, :suggestion_id])
+    |> validate_inclusion(:value, [true, false])
+    |> put_assoc(:user, attrs.created_by)
+    |> put_assoc(:suggestion, attrs.suggestion)
   end
 end

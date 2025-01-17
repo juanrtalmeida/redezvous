@@ -1,8 +1,8 @@
 defmodule Redezvous.CreateSuggestionMutationTest do
   @moduledoc false
   use RedezvousWeb.ConnCase, async: true
-  alias RedezvousWeb.Fixtures.ConnFixtures
   alias Redezvous.EventFactory
+  alias RedezvousWeb.Fixtures.ConnFixtures
 
   test "should create a suggestion correctly", %{conn: conn} do
     # Arrange

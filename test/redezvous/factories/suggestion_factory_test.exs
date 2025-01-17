@@ -6,7 +6,7 @@ defmodule Redezvous.SuggestionFactoryTest do
 
   test "should create a suggestion correctly" do
     suggestion =
-      SuggestionFactory.build_suggestion(
+      SuggestionFactory.build_suggestion!(
         %{name: "Random Suggestion", description: "This is gonna be a good suggestion", location: "Random Location", date: "2022-01-01T00:00:00Z"},
         event = EventFactory.build_event!(UserFactory.build_user!(%{name: "Naruto Uzumaki", email: "naruto@konoha.com"})),
         suggestion_user = UserFactory.build_user!(%{name: "Sasuke Uchiha", email: "uchiha_sasuke@konoha.com"})
@@ -22,7 +22,7 @@ defmodule Redezvous.SuggestionFactoryTest do
 
   test "should create a suggestion correctly without date" do
     suggestion =
-      SuggestionFactory.build_suggestion(
+      SuggestionFactory.build_suggestion!(
         %{name: "Random Suggestion", description: "This is gonna be a good suggestion", location: "Random Location"},
         event = EventFactory.build_event!(UserFactory.build_user!(%{name: "Naruto Uzumaki", email: "naruto@konoha.com"})),
         suggestion_user = UserFactory.build_user!(%{name: "Sasuke Uchiha", email: "uchiha_sasuke@konoha.com"})

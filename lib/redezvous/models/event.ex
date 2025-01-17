@@ -1,6 +1,6 @@
 defmodule Redezvous.Models.Event do
   use Ecto.Schema
-  alias Redezvous.Models.User
+  alias Redezvous.Models.{Suggestion, User}
   import Ecto.Changeset
 
   @moduledoc """
@@ -20,7 +20,9 @@ defmodule Redezvous.Models.Event do
           cancelled: boolean(),
           created_by: User.t(),
           inserted_at: DateTime.t(),
-          updated_at: DateTime.t()
+          updated_at: DateTime.t(),
+          guests: [User.t()],
+          suggestions: [Suggestion.t()]
         }
 
   schema "events" do
@@ -32,6 +34,7 @@ defmodule Redezvous.Models.Event do
     field :cancelled, :boolean, default: false
 
     belongs_to :created_by, User, foreign_key: :created_by_id
+    has_many :suggestions, Suggestion
     many_to_many :guests, User, join_through: "events_guests", join_keys: [event_id: :id, user_id: :id]
     timestamps()
   end

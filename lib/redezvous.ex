@@ -86,4 +86,8 @@ defmodule Redezvous do
   defdelegate create_new_suggestion(params, contexts), to: Redezvous.Suggestion.ManageSuggestions
 
   defdelegate list_suggestions(parent, params, contexts), to: Redezvous.Suggestion.ManageSuggestions
+
+  defdelegate create_new_vote(params, contexts), to: Redezvous.Vote.ManageVotes
+
+  defdelegate list_votes(parent, params, contexts), to: Redezvous.Vote.VotesFieldsResolvers
 end

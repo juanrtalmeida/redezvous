@@ -50,6 +50,9 @@ defmodule Redezvous.EventInfosQueryTest do
     assert event.created_by.name == result_created_by_name
     assert event.date == result_date
     assert event.description == result_description
+    assert event.guests == result_guests
+    assert event.location == result_location
+    assert event.finished == result_finished
   end
 
   test "should return event infos correctly for the given id with guests", %{conn: conn} do
@@ -105,6 +108,7 @@ defmodule Redezvous.EventInfosQueryTest do
     assert event.date == result_date
     assert event.description == result_description
     assert event.location == result_location
+    assert event.finished == result_finished
 
     [guest1, guest2]
     |> Enum.each(fn guest ->
