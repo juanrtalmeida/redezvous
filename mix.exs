@@ -8,10 +8,18 @@ defmodule Redezvous.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18.1",
       elixirc_paths: elixirc_paths(Mix.env()),
+      test_coverage: [tool: ExCoveralls],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      compile: [warnings_as_errors: false]
+      compile: [warnings_as_errors: false],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.cobertura": :test
+      ]
     ]
   end
 
@@ -45,6 +53,7 @@ defmodule Redezvous.MixProject do
       {:phoenix, "~> 1.7.18"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
+      {:excoveralls, "~> 0.18", only: :test},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},

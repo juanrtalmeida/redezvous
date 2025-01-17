@@ -3,7 +3,7 @@ defmodule Redezvous.SuggestionFactory do
   Documentation for SuggestionFactory.
   """
   alias Absinthe.Resolution
-  alias Redezvous.Models.{Event, User, Suggestion}
+  alias Redezvous.Models.{Event, Suggestion, User}
   alias Redezvous.{EventFactory, UserFactory}
   alias Redezvous.Suggestion.ManageSuggestions
 
@@ -14,8 +14,8 @@ defmodule Redezvous.SuggestionFactory do
     name: "Naruto vs Sasukere"
   }
 
-  @spec build_suggestion(map(), Event.t(), User.t()) :: Suggestion.t() | no_return()
-  def build_suggestion(
+  @spec build_suggestion!(map(), Event.t(), User.t()) :: Suggestion.t() | no_return()
+  def build_suggestion!(
         params \\ %{},
         event = %Event{} \\ EventFactory.build_event!(UserFactory.build_user!(%{name: "Naruto Uzumaki", email: "naruto@konoha.com"})),
         user = %User{} \\ UserFactory.build_user!()

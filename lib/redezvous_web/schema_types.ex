@@ -31,6 +31,10 @@ defmodule RedezvousWeb.SchemaTypes do
     field :date, :datetime
     field :event_id, :id
     field :user_id, :id
+
+    field :votes, list_of(:vote) do
+      resolve(&Redezvous.list_votes/3)
+    end
   end
 
   object :vote do

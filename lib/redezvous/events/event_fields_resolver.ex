@@ -3,8 +3,8 @@ defmodule Redezvous.Events.EventFieldsResolver do
   Documentation for EventFieldsResolver.
   """
   alias Absinthe.Resolution
-  alias Redezvous.Models.Event
   alias Redezvous.Helpers.HandlerHelpers
+  alias Redezvous.Models.Event
   alias Redezvous.Repo
 
   def get_event_infos(params, _context = %Resolution{}) do

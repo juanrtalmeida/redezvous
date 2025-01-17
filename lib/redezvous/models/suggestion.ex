@@ -1,5 +1,5 @@
 defmodule Redezvous.Models.Suggestion do
-  alias Redezvous.Models.{Event, User}
+  alias Redezvous.Models.{Event, User, Vote}
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -20,7 +20,8 @@ defmodule Redezvous.Models.Suggestion do
           user: User.t(),
           event: Event.t(),
           inserted_at: DateTime.t(),
-          updated_at: DateTime.t()
+          updated_at: DateTime.t(),
+          votes: [Vote.t()]
         }
 
   schema "suggestions" do
@@ -30,6 +31,7 @@ defmodule Redezvous.Models.Suggestion do
     field :date, :utc_datetime, default: nil
     belongs_to :event, Event
     belongs_to :user, User
+    has_many :votes, Vote
 
     timestamps()
   end
