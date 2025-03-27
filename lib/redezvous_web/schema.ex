@@ -34,4 +34,33 @@ defmodule RedezvousWeb.Schema do
     import_fields(:suggestion_mutations)
     import_fields(:vote_mutations)
   end
+
+  subscription do
+    @desc "Subscribe to new suggestions for an event"
+    field :suggestion_added, :suggestion do
+      arg(:event_id, non_null(:id))
+      
+      config fn args, _info ->
+        {:ok, topic: "new_suggestion:#{args.event_id}"}
+      end
+    end
+
+    @desc "Subscribe to new votes for a suggestion"
+    field :vote_added, :vote do
+      arg(:suggestion_id, non_null(:id))
+      
+      config fn args, _info ->
+        {:ok, topic: "new_vote:#{args.suggestion_id}"}
+      end
+    end
+
+    @desc "Subscribe to event updates"
+    field :event_updated, :event do
+      arg(:event_id, non_null(:id))
+      
+      config fn args, _info ->
+        {:ok, topic: "event_updated:#{args.event_id}"}
+      end
+    end
+  end
 end

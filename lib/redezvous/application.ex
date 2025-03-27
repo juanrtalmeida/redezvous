@@ -13,6 +13,8 @@ defmodule Redezvous.Application do
       Redezvous.Repo,
       {DNSCluster, query: Application.get_env(:redezvous, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Redezvous.PubSub},
+      # Start the Absinthe.Subscription process
+      {Absinthe.Subscription, [RedezvousWeb.Endpoint]},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Redezvous.Finch},
       # Start a worker by calling: Redezvous.Worker.start_link(arg)
