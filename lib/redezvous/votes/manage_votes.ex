@@ -6,6 +6,7 @@ defmodule Redezvous.Vote.ManageVotes do
   alias Redezvous.Helpers.HandlerHelpers
   alias Redezvous.Models.{Event, Suggestion, User, Vote}
   alias Redezvous.Repo
+  alias Absinthe.Subscription
   import Ecto.Query
 
   @spec create_new_vote(%{value: String.t(), suggestion_id: String.t()}, %Resolution{
@@ -23,7 +24,12 @@ defmodule Redezvous.Vote.ManageVotes do
     )
     |> case do
       nil -> {:error, message: "Suggestion not found"}
-      suggestion = %Suggestion{} -> params |> Map.put(:suggestion, suggestion) |> Map.put(:created_by, user) |> create_vote_changeset()
+      suggestion = %Suggestion{} -> 
+        params 
+        |> Map.put(:suggestion, suggestion) 
+        |> Map.put(:created_by, user) 
+        |> create_vote_changeset()
+        |> maybe_broadcast_vote(params.suggestion_id)
     end
   end
 
@@ -32,4 +38,15 @@ defmodule Redezvous.Vote.ManageVotes do
     |> Repo.insert()
     |> HandlerHelpers.handle_insertion("Vote not created")
   end
+
+  defp maybe_broadcast_vote({:ok, vote} = result, suggestion_id) do
+    # Broadcast the new vote to all subscribers
+    Subscription.publish(
+      RedezvousWeb.Endpoint,
+      vote,
+      vote_added: "new_vote:#{suggestion_id}"
+    )
+    result
+  end
+  defp maybe_broadcast_vote(error, _), do: error
 end

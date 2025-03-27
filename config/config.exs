@@ -17,6 +17,10 @@ config :redezvous, Redezvous.Repo,
 
 config :redezvous, RedezvousWeb.Schema, schema_path: "priv/static/schema.json"
 
+config :absinthe,
+  schema: RedezvousWeb.Schema,
+  json_codec: Jason
+
 # Configures the endpoint
 config :redezvous, RedezvousWeb.Endpoint,
   url: [host: "localhost"],

@@ -83,7 +83,8 @@ defmodule Redezvous.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "test.watch": ["test.watch --stale"],
-      "reset.test": ["ecto.drop", "ecto.create", "ecto.migrate", "test"]
+      "reset.test": ["ecto.drop", "ecto.create", "ecto.migrate", "test"],
+      "generate.schema": ["absinthe.schema.sdl --schema RedezvousWeb.Schema ./redezvous-frontend/src/graphql/schema.graphql"]
     ]
   end
 end

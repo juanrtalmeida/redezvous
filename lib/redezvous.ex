@@ -67,6 +67,13 @@ defmodule Redezvous do
   defdelegate create_new_event(params, contexts), to: Redezvous.ManageEvents
 
   @doc """
+  def update_event(params, contexts)
+
+    This function should update an existing event
+  """
+  defdelegate update_event(params, contexts), to: Redezvous.ManageEvents
+
+  @doc """
   def get_event_infos(params, contexts)
 
     This function should return the event infos

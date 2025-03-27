@@ -1,0 +1,138 @@
+schema {
+  subscription: RootSubscriptionType
+  mutation: RootMutationType
+  query: RootQueryType
+}
+
+type RootQueryType {
+  "Get event infos"
+  eventInfos(
+    "Id for the event"
+    eventId: ID!
+  ): Event
+
+  "User infos query"
+  user: User
+
+  "Create login token"
+  createLoginToken(
+    "User email"
+    email: String!
+
+    "User password"
+    password: String!
+  ): String
+}
+
+type RootMutationType {
+  "Create a new event"
+  createEvent(
+    title: String!
+
+    description: String!
+
+    "Date in format YYYY-MM-DD"
+    date: String
+
+    location: String
+
+    "List of guest emails"
+    guests: [String]
+  ): Event
+
+  "Update an existing event"
+  updateEvent(
+    id: ID!
+
+    title: String
+
+    description: String
+
+    "Date in format YYYY-MM-DD"
+    date: String
+
+    location: String
+
+    "List of guest emails"
+    guests: [String]
+  ): Event
+
+  "register a new user"
+  registerUser(name: String!, email: String!, password: String!): User
+
+  "Create a new suggestion"
+  createSuggestion(
+    name: String!
+
+    description: String!
+
+    location: String
+
+    eventId: ID!
+
+    "Date in format YYYY-MM-DD"
+    date: String
+  ): Suggestion
+
+  "Create a new vote"
+  createVote(value: Boolean!, suggestionId: ID!): Vote
+}
+
+type RootSubscriptionType {
+  "Subscribe to new suggestions for an event"
+  suggestionAdded(eventId: ID!): Suggestion
+
+  "Subscribe to new votes for a suggestion"
+  voteAdded(suggestionId: ID!): Vote
+
+  "Subscribe to event updates"
+  eventUpdated(eventId: ID!): Event
+}
+
+type User {
+  id: ID
+  name: String
+  email: String
+  createdEvents: [Event]
+  createdSuggestions: [Suggestion]
+  createdVotes: [Vote]
+}
+
+type Suggestion {
+  id: ID
+  name: String
+  description: String
+  location: String
+  date: DateTime
+  eventId: ID
+  userId: ID
+  votes: [Vote]
+}
+
+type Vote {
+  id: ID
+  value: Boolean
+  userId: ID
+  suggestionId: ID
+}
+
+type Event {
+  id: ID
+  title: String
+  description: String
+  location: String
+  date: DateTime
+  finished: Boolean
+  cancelled: Boolean
+  suggestions: [Suggestion]
+  createdBy: User
+  guests: [User]
+}
+
+"""
+The `DateTime` scalar type represents a date and time in the UTC
+timezone. The DateTime appears in a JSON response as an ISO8601 formatted
+string, including UTC timezone ("Z"). The parsed date and time string will
+be converted to UTC if there is an offset.
+"""
+scalar DateTime

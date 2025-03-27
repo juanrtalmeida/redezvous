@@ -16,5 +16,17 @@ defmodule RedezvousWeb.Mutations.EventMutations do
       middleware(AuthMiddleware)
       resolve(&Redezvous.create_new_event/2)
     end
+
+    @desc "Update an existing event"
+    field :update_event, :event do
+      arg(:id, non_null(:id))
+      arg(:title, :string)
+      arg(:description, :string)
+      arg(:date, :string, description: "Date in format YYYY-MM-DD")
+      arg(:location, :string)
+      arg(:guests, list_of(:string), description: "List of guest emails")
+      middleware(AuthMiddleware)
+      resolve(&Redezvous.update_event/2)
+    end
   end
 end
