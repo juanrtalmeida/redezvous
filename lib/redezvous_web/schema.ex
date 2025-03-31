@@ -15,16 +15,9 @@ defmodule RedezvousWeb.Schema do
   query do
     import_fields(:event_queries)
     @desc "User infos query"
-    field :user, :user do
+    field :user, non_null(:user) do
       middleware(AuthMiddleware)
       resolve(&Redezvous.user_infos/2)
-    end
-
-    @desc "Create login token"
-    field :create_login_token, :string do
-      arg(:email, non_null(:string), description: "User email")
-      arg(:password, non_null(:string), description: "User password")
-      resolve(&Redezvous.create_login_token/2)
     end
   end
 
@@ -33,6 +26,13 @@ defmodule RedezvousWeb.Schema do
     import_fields(:user_mutations)
     import_fields(:suggestion_mutations)
     import_fields(:vote_mutations)
+
+    @desc "Create login token"
+    field :create_login_token, non_null(:string) do
+      arg(:email, non_null(:string), description: "User email")
+      arg(:password, non_null(:string), description: "User password")
+      resolve(&Redezvous.create_login_token/2)
+    end
   end
 
   subscription do

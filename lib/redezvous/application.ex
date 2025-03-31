@@ -12,15 +12,15 @@ defmodule Redezvous.Application do
       RedezvousWeb.Telemetry,
       Redezvous.Repo,
       {DNSCluster, query: Application.get_env(:redezvous, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Redezvous.PubSub},
-      # Start the Absinthe.Subscription process
-      {Absinthe.Subscription, [RedezvousWeb.Endpoint]},
+      {Phoenix.PubSub, [name: Redezvous.PubSub]},
+      RedezvousWeb.Endpoint,
+      {Absinthe.Subscription, RedezvousWeb.Endpoint},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Redezvous.Finch},
       # Start a worker by calling: Redezvous.Worker.start_link(arg)
       # {Redezvous.Worker, arg},
       # Start to serve requests, typically the last entry
-      RedezvousWeb.Endpoint
+      
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

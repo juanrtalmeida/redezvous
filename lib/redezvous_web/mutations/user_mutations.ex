@@ -6,7 +6,7 @@ defmodule RedezvousWeb.Mutations.UserMutations do
 
   object :user_mutations do
     @desc "register a new user"
-    field :register_user, :user do
+    field :register_user, non_null(:user) do
       arg(:name, non_null(:string))
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))

@@ -46,6 +46,7 @@ defmodule Redezvous.MixProject do
       {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_plug, "~> 1.5.0"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:cors_plug, "~> 3.0"},
       {:credo, "1.7.11", only: [:dev, :test], runtime: false},
       {:bunt, "~> 1.0.0", override: true},
       {:dialyxir, "~> 1.3.0", only: [:dev], runtime: false},

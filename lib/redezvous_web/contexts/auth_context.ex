@@ -29,7 +29,7 @@ defmodule RedezvousWeb.Contexts.AuthContext do
   def build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
          {:ok, current_user} <- Auth.authorize(token) do
-      %{current_user: current_user}
+      %{current_user: current_user |> IO.inspect()}
     else
       {:error, "Expired token"} ->
         %{expired: true}

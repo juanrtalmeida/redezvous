@@ -32,6 +32,11 @@ config :redezvous, RedezvousWeb.Endpoint,
   pubsub_server: Redezvous.PubSub,
   live_view: [signing_salt: "3mUACgcD"]
 
+config :cors_plug,
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  headers: ["Content-Type", "Authorization"]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
