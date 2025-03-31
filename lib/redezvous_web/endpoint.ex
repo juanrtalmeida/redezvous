@@ -1,5 +1,6 @@
 defmodule RedezvousWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :redezvous
+  use Absinthe.Phoenix.Endpoint
 
   socket "/socket", RedezvousWeb.UserSocket,
     websocket: true,
@@ -15,6 +16,7 @@ defmodule RedezvousWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
+  plug CORSPlug
   plug RedezvousWeb.Router
   plug Plug.Head
 end

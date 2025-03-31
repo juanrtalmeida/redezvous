@@ -94,4 +94,14 @@ defmodule Redezvous.ManageEvents do
     result
   end
   defp maybe_broadcast_event_created(error), do: error
+
+  def join_event(params, _context = %Resolution{context: %{current_user: user = %User{}}}) do
+    case Repo.get(Event, params.id) do
+      nil ->
+        {:error, message: "Event not found"}
+
+      event ->
+        {:ok, event |> Map.put(:guests, [user | event.guests]) |> Repo.update()}
+    end
+  end
 end

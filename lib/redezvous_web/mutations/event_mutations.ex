@@ -28,5 +28,12 @@ defmodule RedezvousWeb.Mutations.EventMutations do
       middleware(AuthMiddleware)
       resolve(&Redezvous.update_event/2)
     end
+
+    @desc "Join an event"
+    field :join_event, :event do
+      arg(:id, non_null(:id))
+      middleware(AuthMiddleware)
+      resolve(&Redezvous.join_event/2)
+    end
   end
 end

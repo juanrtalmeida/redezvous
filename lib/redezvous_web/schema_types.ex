@@ -6,31 +6,31 @@ defmodule RedezvousWeb.SchemaTypes do
   import_types(Absinthe.Type.Custom)
 
   object :user do
-    field :id, :id
-    field :name, :string
-    field :email, :string
+    field :id, non_null(:id)
+    field :name, non_null(:string)
+    field :email, non_null(:string)
 
-    field :created_events, list_of(:event) do
+    field :created_events, non_null(list_of(:event)) do
       resolve(&Redezvous.list_created_events/2)
     end
 
-    field :created_suggestions, list_of(:suggestion) do
+    field :created_suggestions, non_null(list_of(:suggestion)) do
       resolve(&Redezvous.list_created_suggestions/2)
     end
 
-    field :created_votes, list_of(:vote) do
+    field :created_votes, non_null(list_of(:vote)) do
       resolve(&Redezvous.list_created_votes/2)
     end
   end
 
   object :suggestion do
-    field :id, :id
-    field :name, :string
-    field :description, :string
-    field :location, :string
-    field :date, :datetime
-    field :event_id, :id
-    field :user_id, :id
+    field :id, non_null(:id)
+    field :name, non_null(:string)
+    field :description, non_null(:string)
+    field :location, non_null(:string)
+    field :date, non_null(:datetime)
+    field :event_id, non_null(:id)
+    field :user_id, non_null(:id)
 
     field :votes, list_of(:vote) do
       resolve(&Redezvous.list_votes/3)
@@ -38,20 +38,20 @@ defmodule RedezvousWeb.SchemaTypes do
   end
 
   object :vote do
-    field :id, :id
-    field :value, :boolean
-    field :user_id, :id
-    field :suggestion_id, :id
+    field :id, non_null(:id)
+    field :value, non_null(:boolean)
+    field :user_id, non_null(:id)
+    field :suggestion_id, non_null(:id)
   end
 
   object :event do
-    field :id, :id
-    field :title, :string
-    field :description, :string
+    field :id, non_null(:id)
+    field :title, non_null(:string)
+    field :description, non_null(:string)
     field :location, :string
     field :date, :datetime
-    field :finished, :boolean
-    field :cancelled, :boolean
+    field :finished, non_null(:boolean)
+    field :cancelled, non_null(:boolean)
 
     field :suggestions, list_of(:suggestion) do
       resolve(&Redezvous.list_suggestions/3)
